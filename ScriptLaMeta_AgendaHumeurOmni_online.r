@@ -5,9 +5,6 @@ library(car)
 library(ggplot2)
 library(reshape2)
 
-# 
-
-
 
 (my_sheets <- gs_ls())
 # my_sheets %>% glimpse()
