@@ -3,7 +3,7 @@ library(psych)
 library(igraph)
 # install.packages("tm")  # pour le text mining
 # install.packages("SnowballC") # pour le text stemming
-# install.packages("wordcloud") # gÈnÈrateur de word-cloud 
+# install.packages("wordcloud") # g√©n√©rateur de word-cloud 
 # install.packages("RColorBrewer") # Palettes de couleurs
 # Charger
 library("tm")
@@ -12,6 +12,7 @@ library("wordcloud")
 library("RColorBrewer")
 library("magrittr")
 
+# la function gs_ls() n'est pas d√©finie
 (my_sheets <- gs_ls())
 # my_sheets %>% glimpse()
 gs_ls("")[1]
@@ -23,7 +24,7 @@ CarnGrat %>% gs_browse()
 CarnGrat
 gs_ws_ls(CarnGrat)
 
-CarnGrat2 <- CarnGrat %>% gs_read(ws = "RÈponses au formulaire 1")
+CarnGrat2 <- CarnGrat %>% gs_read(ws = "R√©ponses au formulaire 1")
 CarnGrat2
 str(CarnGrat2)
 glimpse(CarnGrat2)
@@ -44,19 +45,19 @@ CarnGratDF_AdB <- CarnGratDF[CarnGratDF$ID=="AdB",]
 CarnGratDF_AdB$Horodateur2 <- as.Date(CarnGratDF_AdB$Horodateur, "%d/%m/%y")
 
 
-# etat de bien Ítre
+# etat de bien √™tre
 
-psych::describe(CarnGratDF_AdB$Etat.de.bien.Ítre)
+psych::describe(CarnGratDF_AdB$Etat.de.bien.√™tre)
 
-plot(CarnGratDF_AdB$Etat.de.bien.Ítre ~ CarnGratDF_AdB$Horodateur2, ylim=c(0,10))
+plot(CarnGratDF_AdB$Etat.de.bien.√™tre ~ CarnGratDF_AdB$Horodateur2, ylim=c(0,10))
 abline(a = NULL, b = NULL, h = 5, v = NULL, col="black")
-abline(lm(CarnGratDF_AdB$Etat.de.bien.Ítre ~ CarnGratDF_AdB$Horodateur2), col="red")
-# lo <- loess(CarnGratDF_AdB$Etat.de.bien.Ítre ~ CarnGratDF_AdB$Horodateur2)
+abline(lm(CarnGratDF_AdB$Etat.de.bien.√™tre ~ CarnGratDF_AdB$Horodateur2), col="red")
+# lo <- loess(CarnGratDF_AdB$Etat.de.bien.√™tre ~ CarnGratDF_AdB$Horodateur2)
 # lines(predict(lo), col='green', lwd=2)
        
        
-boxplot(CarnGratDF_AdB$Etat.de.bien.Ítre, ylim=c(0,10))
-points(mean(CarnGratDF_AdB$Etat.de.bien.Ítre), col = "red", pch = 1)
+boxplot(CarnGratDF_AdB$Etat.de.bien.√™tre, ylim=c(0,10))
+points(mean(CarnGratDF_AdB$Etat.de.bien.√™tre), col = "red", pch = 1)
 abline(a = NULL, b = NULL, h = 5, v = NULL, col="black")
 
 ####
@@ -81,13 +82,13 @@ x2 <- tm_map(x2, toSpace, "'")
 x2 <- tm_map(x2, content_transformer(tolower))
 # Supprimer les nombres
 x2 <- tm_map(x2, removeNumbers)
-# Supprimer les mots vides franÁais
+# Supprimer les mots vides fran√ßais
 # x2 <- tm_map(x2, removeWords, stopwords("french"))
-# # Supprimer votre propre liste de mots non dÈsirÈs
+# # Supprimer votre propre liste de mots non d√©sir√©s
 # x2 <- tm_map(x2, removeWords, c("blabla1", "blabla2")) 
 # Supprimer les ponctuations
 x2 <- tm_map(x2, removePunctuation)
-# Supprimer les espaces vides supplÈmentaires
+# Supprimer les espaces vides suppl√©mentaires
 x2 <- tm_map(x2, stripWhitespace)
 # Text stemming
 # x2 <- tm_map(x2, stemDocument)
@@ -98,11 +99,11 @@ inspect(x2)
 # toElse <- content_transformer(function (x, y, pattern ) gsub(pattern, y, x))
 
 
-estoE <- content_transformer(function (x) gsub("[È,Ë,Í,Î]", "e", x))
-astoA <- content_transformer(function (x) gsub("[‚,‡,·,‰]", "a", x))
-istoI <- content_transformer(function (x) gsub("[Ó,Ì,Ï,Ô]", "i", x))
-ustoU <- content_transformer(function (x) gsub("[˚,˙,˘,¸]", "u", x))
-ostoO <- content_transformer(function (x) gsub("[Ù,Û,Ú,ˆ]", "o", x))
+estoE <- content_transformer(function (x) gsub("[√©,√®,√™,√´]", "e", x))
+astoA <- content_transformer(function (x) gsub("[√¢,√†,√°,√§]", "a", x))
+istoI <- content_transformer(function (x) gsub("[√Æ,√≠,√¨,√Ø]", "i", x))
+ustoU <- content_transformer(function (x) gsub("[√ª,√∫,√π,√º]", "u", x))
+ostoO <- content_transformer(function (x) gsub("[√¥,√≥,√≤,√∂]", "o", x))
 
 x2 <- tm_map(x2, estoE)
 x2 <- tm_map(x2, istoI)
@@ -131,7 +132,7 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 1,
 
 #### SANS les stopwords french
 
-# Supprimer les mots vides franÁais
+# Supprimer les mots vides fran√ßais
 x3 <- tm_map(x2, removeWords, stopwords("french"))
 
 dtm <- TermDocumentMatrix(x3)
