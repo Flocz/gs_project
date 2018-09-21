@@ -5,9 +5,6 @@ library(car)
 library(ggplot2)
 library(reshape2)
 
-# 
-# https://docs.google.com/spreadsheets/d/1dQ1o2NKWI-XcVwRA_mGQaXZyO0iuTvgQlcEaxodm9Bg/edit?usp=sharing
-
 
 (my_sheets <- gs_ls())
 # my_sheets %>% glimpse()
