@@ -7,7 +7,7 @@ library(dplyr)
 
 
 ### load the data ----
-data = gsheet2tbl("https://docs.google.com/spreadsheets/d/13NyYu1pvpfA3Sy3hV_a9qa2Rd3Ls9CZO22KvPsrTbaY")
+data = gsheet2tbl(path)
 
 # NOTES: find useful info about spreadsheets queries at : construct_download_url {gsheet}
 
